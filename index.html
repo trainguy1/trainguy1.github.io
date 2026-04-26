@@ -11,7 +11,7 @@ body {
   margin: 0;
   background: #f0f4f8;
   color: #000;
-  transition: 0.3s;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* DARK MODE */
@@ -34,6 +34,18 @@ body {
 
 .dark-mode h2 {
   color: #66aaff;
+}
+
+.dark-mode .contact-form input,
+.dark-mode .contact-form textarea {
+  background: #2a2a2a;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+.dark-mode .contact-form input::placeholder,
+.dark-mode .contact-form textarea::placeholder {
+  color: #aaa;
 }
 
 /* OVERLAY */
@@ -61,11 +73,53 @@ header {
   position: relative;
 }
 
-/* DARK MODE BUTTON */
-#darkModeBtn {
+/* SLIDER */
+.switch {
   position: absolute;
   top: 15px;
   right: 15px;
+  width: 62px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: #cfd8e3;
+  border-radius: 999px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "☀️";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: 0.4s;
+}
+
+.switch input:checked + .slider {
+  background: #111827;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(28px) rotate(360deg);
+  content: "🌙";
 }
 
 /* MAIN */
@@ -80,6 +134,7 @@ main {
   padding: 1.5em;
   margin-bottom: 2em;
   border-radius: 10px;
+  transition: background 0.3s;
 }
 
 h2 {
@@ -99,7 +154,6 @@ h2 {
   object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
-
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
@@ -118,9 +172,11 @@ h2 {
   width: 100%;
   padding: 0.6em;
   margin-bottom: 1em;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
-/* BUTTON */
 button {
   padding: 0.7em 1.2em;
   background: #007bff;
@@ -143,7 +199,11 @@ footer {
 
 <header>
   <h1>David's Modern Trains</h1>
-  <button id="darkModeBtn">Dark Mode</button>
+
+  <label class="switch">
+    <input type="checkbox" id="darkModeToggle">
+    <span class="slider"></span>
+  </label>
 </header>
 
 <main>
@@ -187,9 +247,9 @@ footer {
 </footer>
 
 <script>
-const btn = document.getElementById("darkModeBtn");
+const toggle = document.getElementById("darkModeToggle");
 
-btn.addEventListener("click", () => {
+toggle.addEventListener("change", () => {
   document.body.classList.toggle("dark-mode");
 });
 </script>
