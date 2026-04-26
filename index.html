@@ -50,10 +50,12 @@
       margin-top: 0;
     }
 
+    /* GALLERY */
     .gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 1em;
+      overflow: hidden;
     }
 
     .gallery img {
@@ -63,8 +65,18 @@
       height: 180px;
       object-fit: cover;
       border-radius: 8px;
+      cursor: pointer;
+
+      transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
     }
 
+    .gallery img:hover {
+      transform: scale(1.06) rotate(0.5deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+      filter: brightness(1.1);
+    }
+
+    /* CONTACT FORM */
     .contact-form {
       max-width: 600px;
     }
@@ -128,12 +140,12 @@
       <h2>Gallery of Modern Trains</h2>
 
       <div class="gallery">
-        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Modern train on railway tracks">
-        <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop" alt="Train at a station">
-        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Train travelling through scenery">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Modern train">
+        <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop" alt="Train station">
+        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Train landscape">
         <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80" alt="Train platform">
         <img src="https://images.unsplash.com/photo-1555217851-6141535bd771?auto=format&fit=crop&w=800&q=80" alt="Railway tracks">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Landscape near railway">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Railway scenery">
       </div>
     </section>
 
