@@ -1,104 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David's Modern Trains</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 1em 0;
-            text-align: center;
-        }
-        main {
-            padding: 1em;
-        }
-        .section {
-            margin-bottom: 2em;
-        }
-        h1, h2 {
-            color: #ff4500;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1em;
-        }
-        .gallery img {
-            width: calc(33% - 1em);
-            border-radius: 8px;
-        }
-        .contact-form {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 1em;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .contact-form label {
-            display: block;
-            margin-bottom: 0.5em;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.5em;
-            margin-bottom: 1em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .contact-form button {
-            background-color: #007bff;
-            color: white;
-            padding: 0.75em 1.5em;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David's Modern Trains</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f8;
+      color: #222;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 2em 1em;
+      text-align: center;
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+    }
+
+    header p {
+      margin-top: 0.5em;
+      font-size: 1.1em;
+    }
+
+    main {
+      padding: 1.5em;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section {
+      margin-bottom: 2em;
+      background: white;
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #ff4500;
+      margin-top: 0;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+    .gallery img {
+      width: calc(33.333% - 1em);
+      min-width: 220px;
+      flex-grow: 1;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .contact-form {
+      max-width: 600px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.4em;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.7em;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    .contact-form button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.8em 1.5em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .contact-form button:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background: #222;
+      color: white;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to David's Modern Trains</h1>
-    </header>
-    <main>
-        <section class="section" id="about">
-            <h2>About Me</h2>
-            <p>Hello! My name is David and I have a passion for modern trains. I enjoy exploring the latest advancements in train technology and sharing my enthusiasm with others.</p>
-        </section>
-        <section class="section" id="gallery">
-            <h2>Gallery of Modern Trains</h2>
-            <div class="gallery">
-                <img source="images.unsplash.com/path/to/peter-bosch-BUqjac-J5vg-unsplash.jpg" alt="Train 1">
-                <img src="https://https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Train 2">
-                <img src="https://via.placeholder.com/300?text=Train+3" alt="Train 3">
-                <img src="https://via.placeholder.com/300?text=Train+4" alt="Train 4">
-                <img src="https://via.placeholder.com/300?text=Train+5" alt="Train 5">
-                <img src="https://via.placeholder.com/300?text=Train+6" alt="Train 6">
-            </div>
-        </section>
-        <section class="section" id="contact">
-            <h2>Contact Me</h2>
-            <form class="contact-form" action="https://formspree.io/f/xqkroqjk" method="POST">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+  <header>
+    <h1>Welcome to David's Modern Trains</h1>
+    <p>A website about modern trains, railway technology and cool train designs.</p>
+  </header>
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+  <main>
+    <section class="section" id="about">
+      <h2>About Me</h2>
+      <p>
+        Hello! My name is David and I have a passion for modern trains.
+        I enjoy exploring the latest advancements in train technology and sharing my enthusiasm with others.
+      </p>
+    </section>
 
-                <button> type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
+    <section class="section" id="gallery">
+      <h2>Gallery of Modern Trains</h2>
+
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Modern train on railway tracks">
+        <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop" alt="Train at a station">
+        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Train travelling through scenery">
+        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80" alt="Train platform">
+        <img src="https://images.unsplash.com/photo-1555217851-6141535bd771?auto=format&fit=crop&w=800&q=80" alt="Railway tracks">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Landscape near railway">
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact Me</h2>
+
+      <form class="contact-form" action="https://formspree.io/f/xqkroqjk" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 David's Modern Trains</p>
+  </footer>
 </body>
 </html>
