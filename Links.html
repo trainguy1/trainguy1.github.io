@@ -1,1 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David's Links</title>
 
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f0f4f8;
+  color: #000;
+  transition: 0.3s;
+}
+
+.dark-mode {
+  background: #111;
+  color: #eee;
+}
+
+.dark-mode .card,
+.dark-mode .link-card {
+  background: #1e1e1e;
+}
+
+.dark-mode header {
+  background: #003b7a;
+}
+
+.dark-mode footer {
+  background: #000;
+}
+
+.dark-mode h2 {
+  color: #66aaff;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 240px;
+  height: 100%;
+  background: #111827;
+  color: white;
+  padding: 1.5em;
+  box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  z-index: 30;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 1em 0;
+  padding: 0.7em;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background: #007bff;
+}
+
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 25;
+}
+
+#closeSidebar {
+  float: right;
+  font-size: 1.5em;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* HEADER */
+header {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  position: relative;
+}
+
+.switch {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 62px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "☀️";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s;
+}
+
+.switch input:checked + .slider {
+  background: #111827;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(28px) rotate(360deg);
+  content: "🌙";
+}
+
+/* MAIN */
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 1.5em;
+}
+
+.card {
+  background: white;
+  padding: 2em;
+  border-radius: 16px;
+  margin-bottom: 2em;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.profile-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007bff, #66aaff);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,123,255,0.35);
+}
+
+h2 {
+  color: #ff4500;
+}
+
+.links {
+  display: grid;
+  gap: 1em;
+}
+
+.link-card {
+  background: white;
+  color: inherit;
+  text-decoration: none;
+  padding: 1.2em;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 6px solid #007bff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.25s;
+}
+
+.link-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  outline: 3px solid #007bff;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+}
+
+.link-title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.link-subtitle {
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
+.arrow {
+  font-size: 1.5em;
+  color: #007bff;
+}
+
+footer {
+  text-align: center;
+  padding: 1em;
+  background: #222;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<nav id="sidebar" class="sidebar">
+  <button id="closeSidebar">×</button>
+  <h2>Pages</h2>
+  <a href="index.html">Home</a>
+  <a href="links.html">Links</a>
+  <a href="trains.html">Trains</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<button id="openSidebar" class="menu-btn">☰</button>
+
+<header>
+  <h1>David's Links</h1>
+
+  <label class="switch">
+    <input type="checkbox" id="darkModeToggle">
+    <span class="slider"></span>
+  </label>
+</header>
+
+<main>
+
+<section class="card">
+  <div class="profile-circle">🚆</div>
+  <h2>My Accounts</h2>
+  <p>Here are my main links and profiles.</p>
+</section>
+
+<section class="links">
+
+  <a class="link-card" href="https://github.com/yourusername" target="_blank">
+    <div>
+      <div class="link-title">GitHub</div>
+      <div class="link-subtitle">My code and projects</div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="link-card" href="https://youtube.com/@yourusername" target="_blank">
+    <div>
+      <div class="link-title">YouTube</div>
+      <div class="link-subtitle">Videos and train content</div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 David</p>
+</footer>
+
+<script>
+document.getElementById("darkModeToggle").addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode");
+});
+
+const sidebar = document.getElementById("sidebar");
+document.getElementById("openSidebar").onclick = () => sidebar.classList.add("open");
+document.getElementById("closeSidebar").onclick = () => sidebar.classList.remove("open");
+</script>
+
+</body>
+</html>
