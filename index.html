@@ -246,10 +246,11 @@ footer {
 <nav id="sidebar" class="sidebar">
   <button id="closeSidebar">×</button>
   <h2>Pages</h2>
-  <a href="index.html">Home</a>
+  <a href="index.html" class="active">Home</a>
   <a href="links.html">Links</a>
 </nav>
 
+  
 <button id="openSidebar" class="menu-btn">
   <span class="bar"></span>
   <span class="bar"></span>
@@ -326,6 +327,12 @@ menuBtn.onclick = () => {
 document.getElementById("closeSidebar").onclick = () => {
   sidebar.classList.remove("open");
   menuBtn.classList.remove("open");
+};
+
+.sidebar a.active {
+  background: #007bff;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(0,123,255,0.6);
 };
 </script>
 
