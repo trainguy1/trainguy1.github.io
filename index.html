@@ -11,7 +11,7 @@ body {
   margin: 0;
   background: #f0f4f8;
   color: #000;
-  transition: background 0.3s, color 0.3s;
+  transition: 0.3s;
 }
 
 /* DARK MODE */
@@ -43,9 +43,54 @@ body {
   border: 1px solid #555;
 }
 
-.dark-mode .contact-form input::placeholder,
-.dark-mode .contact-form textarea::placeholder {
-  color: #aaa;
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 240px;
+  height: 100%;
+  background: #111827;
+  color: white;
+  padding: 1.5em;
+  box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  z-index: 30;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 1em 0;
+  padding: 0.7em;
+  border-radius: 6px;
+}
+
+.sidebar a:hover {
+  background: #007bff;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 25;
+}
+
+/* CLOSE BUTTON */
+#closeSidebar {
+  float: right;
+  font-size: 1.5em;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 /* OVERLAY */
@@ -73,7 +118,7 @@ header {
   position: relative;
 }
 
-/* SLIDER */
+/* DARK MODE SLIDER */
 .switch {
   position: absolute;
   top: 15px;
@@ -84,16 +129,14 @@ header {
 
 .switch input {
   opacity: 0;
-  width: 0;
-  height: 0;
 }
 
 .slider {
   position: absolute;
   inset: 0;
-  cursor: pointer;
-  background: #cfd8e3;
+  background: #ccc;
   border-radius: 999px;
+  cursor: pointer;
   transition: 0.4s;
 }
 
@@ -109,7 +152,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
   transition: 0.4s;
 }
 
@@ -134,7 +176,6 @@ main {
   padding: 1.5em;
   margin-bottom: 2em;
   border-radius: 10px;
-  transition: background 0.3s;
 }
 
 h2 {
@@ -155,7 +196,6 @@ h2 {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
   z-index: 1;
 }
 
@@ -172,11 +212,10 @@ h2 {
   width: 100%;
   padding: 0.6em;
   margin-bottom: 1em;
-  box-sizing: border-box;
   border: 1px solid #ccc;
-  transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
+/* BUTTON */
 button {
   padding: 0.7em 1.2em;
   background: #007bff;
@@ -197,6 +236,18 @@ footer {
 
 <body>
 
+<!-- SIDEBAR -->
+<nav id="sidebar" class="sidebar">
+  <button id="closeSidebar">×</button>
+  <h2>Pages</h2>
+  <a href="index.html">Home</a>
+  <a href="trains.html">Trains</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<button id="openSidebar" class="menu-btn">☰</button>
+
 <header>
   <h1>David's Modern Trains</h1>
 
@@ -210,12 +261,11 @@ footer {
 
 <section class="section">
   <h2>About Me</h2>
-  <p>Hello, my name is David and I have a passion for modern trains. I enjoy exploring the latest advancements in train technology and sharing my enthusiasm with others!</p>
+  <p>Hello, my name is David and I love modern trains and railway technology.</p>
 </section>
 
 <section class="section">
   <h2>Gallery</h2>
-
   <div class="gallery">
     <img src="https://images.unsplash.com/photo-1683425806298-178e0fdfc287?q=80&w=1374&auto=format&fit=crop">
     <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop">
@@ -224,12 +274,10 @@ footer {
     <img src="https://images.unsplash.com/photo-1555217851-6141535bd771?auto=format&fit=crop&w=800&q=80">
     <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80">
   </div>
-
 </section>
 
 <section class="section">
   <h2>Contact</h2>
-
   <form class="contact-form" action="https://formspree.io/f/xqkroqjk" method="POST">
     <input type="text" name="name" placeholder="Name" required>
     <input type="email" name="email" placeholder="Email" required>
@@ -247,11 +295,15 @@ footer {
 </footer>
 
 <script>
-const toggle = document.getElementById("darkModeToggle");
-
-toggle.addEventListener("change", () => {
+/* DARK MODE */
+document.getElementById("darkModeToggle").addEventListener("change", () => {
   document.body.classList.toggle("dark-mode");
 });
+
+/* SIDEBAR */
+const sidebar = document.getElementById("sidebar");
+document.getElementById("openSidebar").onclick = () => sidebar.classList.add("open");
+document.getElementById("closeSidebar").onclick = () => sidebar.classList.remove("open");
 </script>
 
 </body>
