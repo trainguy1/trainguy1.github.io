@@ -78,9 +78,48 @@ body {
 /* MENU BUTTON */
 .menu-btn {
   position: fixed;
-  top: 15px;
-  left: 15px;
+  top: 18px;
+  left: 18px;
   z-index: 25;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s;
+  padding: 0;
+}
+
+.menu-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.35);
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.menu-btn.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-btn.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* CLOSE BUTTON */
@@ -236,7 +275,6 @@ footer {
 
 <body>
 
-<!-- SIDEBAR -->
 <nav id="sidebar" class="sidebar">
   <button id="closeSidebar">×</button>
   <h2>Pages</h2>
@@ -244,7 +282,11 @@ footer {
   <a href="Links.html">Links</a>
 </nav>
 
-<button id="openSidebar" class="menu-btn">☰</button>
+<button id="openSidebar" class="menu-btn">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
 
 <header>
   <h1>David's Modern Trains</h1>
@@ -293,15 +335,22 @@ footer {
 </footer>
 
 <script>
-/* DARK MODE */
 document.getElementById("darkModeToggle").addEventListener("change", () => {
   document.body.classList.toggle("dark-mode");
 });
 
-/* SIDEBAR */
 const sidebar = document.getElementById("sidebar");
-document.getElementById("openSidebar").onclick = () => sidebar.classList.add("open");
-document.getElementById("closeSidebar").onclick = () => sidebar.classList.remove("open");
+const menuBtn = document.getElementById("openSidebar");
+
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("open");
+  menuBtn.classList.toggle("open");
+};
+
+document.getElementById("closeSidebar").onclick = () => {
+  sidebar.classList.remove("open");
+  menuBtn.classList.remove("open");
+};
 </script>
 
 </body>
