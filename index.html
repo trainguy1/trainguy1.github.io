@@ -578,6 +578,24 @@ body:not(.dark-mode) .sidebar::after {
   opacity: 0;
 }
 
+.section {
+  overflow: visible;
+}
+
+.gallery {
+  position: relative;
+  z-index: 1;
+}
+
+.img-container {
+  position: relative;
+  z-index: 1;
+}
+
+.img-container:hover {
+  z-index: 1000;
+}
+
 /* MOBILE */
 @media (max-width: 700px) {
   .img-container {
