@@ -341,51 +341,53 @@ header h1 {
 }
 
 /* DARK MODE SLIDER */
-.switch {
+
+.power-switch {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 62px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-}
-
-.slider {
-  position: absolute;
-  inset: 0;
-  background: #ccc;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.slider::before {
-  content: "☀️";
-  position: absolute;
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background: white;
-  border-radius: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.4s;
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
 }
 
-.switch input:checked + .slider {
-  background: #111827;
+.power-btn {
+  width: 42px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: #222;
+  color: #777;
+  transition: 0.25s;
 }
 
-.switch input:checked + .slider::before {
-  transform: translateX(28px) rotate(360deg);
-  content: "🌙";
+.power-btn:hover {
+  background: #333;
 }
 
+.power-btn.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 0 12px rgba(0,123,255,0.8);
+}
+
+.dark-mode .power-switch {
+  border-color: #444;
+  background: #050505;
+}
+
+.dark-mode .power-btn.active {
+  background: #ffcc00;
+  color: #111;
+  box-shadow: 0 0 14px rgba(255,204,0,0.8);
+}
+  
 /* MAIN */
 main {
   max-width: 1000px;
@@ -688,10 +690,10 @@ body.loaded {
 <header>
   <h1>David's Modern Trains</h1>
 
-  <label class="switch">
-    <input type="checkbox" id="darkModeToggle">
-    <span class="slider"></span>
-  </label>
+<div class="power-switch">
+  <button id="lightModeBtn" class="power-btn active">I</button>
+  <button id="darkModeBtn" class="power-btn">O</button>
+</div>
 </header>
 
 <main>
@@ -757,7 +759,6 @@ body.loaded {
 </footer>
 
 <script>
-const toggle = document.getElementById("darkModeToggle");
 const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("openSidebar");
 const overlay = document.getElementById("overlay");
@@ -765,20 +766,37 @@ const closeSidebar = document.getElementById("closeSidebar");
 const trainTransition = document.getElementById("pageTrainTransition");
 const pageLinks = document.querySelectorAll(".page-link");
 
-if (localStorage.getItem("darkMode") === "on") {
-  document.body.classList.add("dark-mode");
-  toggle.checked = true;
+const lightModeBtn = document.getElementById("lightModeBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
+
+function updateThemeButtons() {
+  if (document.body.classList.contains("dark-mode")) {
+    lightModeBtn.classList.remove("active");
+    darkModeBtn.classList.add("active");
+  } else {
+    darkModeBtn.classList.remove("active");
+    lightModeBtn.classList.add("active");
+  }
 }
 
-toggle.addEventListener("change", () => {
-  document.body.classList.toggle("dark-mode");
+if (localStorage.getItem("darkMode") === "on") {
+  document.body.classList.add("dark-mode");
+}
 
-  localStorage.setItem(
-    "darkMode",
-    document.body.classList.contains("dark-mode") ? "on" : "off"
-  );
-});
+updateThemeButtons();
 
+lightModeBtn.onclick = () => {
+  document.body.classList.remove("dark-mode");
+  localStorage.setItem("darkMode", "off");
+  updateThemeButtons();
+};
+
+darkModeBtn.onclick = () => {
+  document.body.classList.add("dark-mode");
+  localStorage.setItem("darkMode", "on");
+  updateThemeButtons();
+};
+  
 menuBtn.onclick = () => {
   sidebar.classList.toggle("open");
   menuBtn.classList.toggle("open");
