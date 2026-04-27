@@ -344,7 +344,19 @@ h2 {
 .img-container:hover .caption {
   opacity: 1;
 }
-  
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.img-container {
+  width: calc(33.333% - 1em);
+  position: relative;
+  z-index: 1;
+}
+
 /* CONTACT */
 .contact-form input,
 .contact-form textarea {
