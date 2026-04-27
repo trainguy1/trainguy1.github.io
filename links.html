@@ -297,10 +297,35 @@ footer {
 .close-btn span:nth-child(2) {
   transform: rotate(-45deg);
 }
+
+.sidebar {
+  transition: left 0.3s ease;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 5;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
 </style>
 </head>
 
 <body>
+
+<div id="overlay"></div>
 
 <nav id="sidebar" class="sidebar">
   <button id="closeSidebar" class="close-btn">
@@ -396,6 +421,24 @@ menuBtn.onclick = () => {
 document.getElementById("closeSidebar").onclick = () => {
   sidebar.classList.remove("open");
   menuBtn.classList.remove("open");
+};
+
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("open");
+  menuBtn.classList.toggle("open");
+  overlay.classList.toggle("active");
+};
+
+closeSidebar.onclick = () => {
+  sidebar.classList.remove("open");
+  menuBtn.classList.remove("open");
+  overlay.classList.remove("active");
+};
+
+overlay.onclick = () => {
+  sidebar.classList.remove("open");
+  menuBtn.classList.remove("open");
+  overlay.classList.remove("active");
 };
 </script>
 
