@@ -304,7 +304,11 @@ h2 {
 
 .img-container {
   position: relative;
-  width: calc(33.333% - 1em);
+  z-index: 1;
+}
+
+.img-container:hover {
+  z-index: 100;
 }
 
 .img-container img {
@@ -313,6 +317,13 @@ h2 {
   object-fit: cover;
   border-radius: 8px;
   display: block;
+  transition: 0.3s ease;
+}
+
+.img-container:hover img {
+  transform: scale(1.5);
+  z-index: 50;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .caption {
@@ -327,34 +338,11 @@ h2 {
   opacity: 0;
   transition: 0.3s;
   border-radius: 0 0 8px 8px;
+  z-index: 200;
 }
 
-/* Show on hover */
 .img-container:hover .caption {
   opacity: 1;
-}
-
-.img-container {
-  position: relative;
-  z-index: 1;
-}
-
-.img-container:hover {
-  z-index: 100;
-}
-
-.img-container img {
-  position: relative;
-  z-index: 1;
-}
-
-.img-container:hover img {
-  transform: scale(1.5);
-  z-index: 100;
-}
-
-.img-container:hover img {
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
   
 /* CONTACT */
