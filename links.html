@@ -56,6 +56,22 @@ body {
   pointer-events: all;
 }
 
+#pageTrainTransition {
+  position: fixed;
+  top: 50%;
+  left: -210%;
+  transform: translateY(-50%);
+  height: 120px;
+  width: auto;
+  z-index: 9999;
+  pointer-events: none;
+  transition: left 1s linear;
+}
+
+#pageTrainTransition.active {
+  left: 100%;
+}  
+
 /* SIDEBAR */
 .sidebar {
   position: fixed;
@@ -382,6 +398,8 @@ footer {
 
 <body>
 
+<img id="pageTrainTransition" src="train.png" alt="Train">
+  
 <div id="overlay"></div>
 
 <nav id="sidebar" class="sidebar">
@@ -391,8 +409,8 @@ footer {
   </button>
 
   <h2>Pages</h2>
-  <a href="index.html">Home</a>
-  <a href="links.html" class="active">Links</a>
+  <a href="index.html" class="page-link">Home</a>
+<a href="links.html" class="active">Links</a>
 </nav>
 
 <button id="openSidebar" class="menu-btn">
@@ -490,6 +508,23 @@ overlay.onclick = () => {
   menuBtn.classList.remove("open");
   overlay.classList.remove("active");
 };
+
+const trainTransition = document.getElementById("pageTrainTransition");
+const pageLinks = document.querySelectorAll(".page-link");
+
+pageLinks.forEach(link => {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const targetPage = this.href;
+
+    trainTransition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 1000);
+  });
+});
 </script>
 
 </body>
