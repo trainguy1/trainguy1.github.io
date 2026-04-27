@@ -596,23 +596,6 @@ body:not(.dark-mode) .sidebar::after {
   z-index: 1000;
 }
 
-.img-container::before {
-  content: "";
-  position: absolute;
-  top: 40%;
-  left: 10%;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0.3) 40%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-}
-
-.img-container:hover::before {
-  opacity: 1;
-}
-
 /* MOBILE */
 @media (max-width: 700px) {
   .img-container {
