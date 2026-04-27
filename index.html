@@ -49,18 +49,25 @@ body {
 /* PAGE TRAIN TRANSITION */
 #pageTrainTransition {
   position: fixed;
-  top: 45%;
-  left: -200px;
-  font-size: 5rem;
+  top: 50%;
+  left: -100%;
+  transform: translateY(-50%);
+  height: 120px;
+  width: auto;
   z-index: 9999;
   pointer-events: none;
-  transition: left 0.8s ease-in-out;
+  transition: left 1s linear;
 }
 
 #pageTrainTransition.active {
-  left: 110%;
+  left: 100%;
 }
 
+#pageTrainTransition.active {
+  left: 100%;
+  filter: blur(1.5px);
+}
+  
 /* OVERLAY */
 #overlay {
   position: fixed;
@@ -396,7 +403,7 @@ footer {
 
 <body>
 
-<div id="pageTrainTransition">🚆</div>
+<img id="pageTrainTransition" src="train.PNG" alt="Train">
 <div id="overlay"></div>
 
 <nav id="sidebar" class="sidebar">
