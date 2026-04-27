@@ -17,6 +17,16 @@ body {
   transition: 0.3s;
 }
 
+header {
+  background: #007bff;
+  color: white;
+}
+
+body:not(.dark-mode) header {
+  background: #007bff;
+  color: white;
+}
+  
 /* DARK MODE */
 .dark-mode {
   background: #050505;
@@ -44,6 +54,22 @@ body {
   color: #ffcc00;
 }
 
+.dark-mode .contact-form input,
+.dark-mode .contact-form textarea {
+  background: #1a1a1a;
+  color: #f5f5f5;
+  border: 1px solid #444;
+}
+
+.dark-mode .contact-form button {
+  background: #ffcc00;
+  color: #111;
+}
+
+.dark-mode .contact-form button:hover {
+  background: #e6b800;
+}
+  
 /* PAGE TRAIN TRANSITION */
 #pageTrainTransition {
   position: fixed;
