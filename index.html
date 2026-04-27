@@ -596,6 +596,15 @@ body:not(.dark-mode) .sidebar::after {
   z-index: 1000;
 }
 
+body {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+  
 /* MOBILE */
 @media (max-width: 700px) {
   .img-container {
@@ -755,6 +764,10 @@ pageLinks.forEach(link => {
       window.location.href = targetPage;
     }, 800);
   });
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
 });
 </script>
 
