@@ -323,6 +323,17 @@ footer {
 .sidebar a.active {
   transform: translateX(8px);
 }
+
+.sidebar a {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: 0.3s;
+}
+
+.sidebar.open a {
+  opacity: 1;
+  transform: translateX(0);
+}
 </style>
 </head>
 
