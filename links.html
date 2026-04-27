@@ -266,13 +266,60 @@ footer {
   font-weight: bold;
   box-shadow: 0 0 12px rgba(0,123,255,0.6);
 }
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
+}
+
+.close-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.1);
+}
+
+/* The X lines */
+.close-btn span {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* Rotate into X */
+.close-btn span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.close-btn span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.close-btn:active {
+  transform: scale(0.9);
+}
 </style>
 </head>
 
 <body>
 
 <nav id="sidebar" class="sidebar">
-  <button id="closeSidebar">×</button>
+  <button id="closeSidebar" class="close-btn">
+  <span></span>
+  <span></span>
+</button>
   <h2>Pages</h2>
   <a href="index.html">Home</a>
 <a href="links.html" class="active">Links</a>
