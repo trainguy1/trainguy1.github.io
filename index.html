@@ -508,10 +508,14 @@ body:not(.dark-mode) header h1 {
 
 /* Sections */
 body:not(.dark-mode) .section {
-  background: #ffffff;
-  color: #000;
+  background: #0056b3;
+  color: white;
   border: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+body:not(.dark-mode) .section * {
+  color: white;
 }
 
 /* Contact form */
@@ -529,6 +533,12 @@ body:not(.dark-mode) .contact-form button {
 
 body:not(.dark-mode) .contact-form button:hover {
   background: #0056b3;
+}
+
+body:not(.dark-mode) .contact-form input,
+body:not(.dark-mode) .contact-form textarea {
+  background: white;
+  color: #000;
 }
   
 /* MOBILE */
