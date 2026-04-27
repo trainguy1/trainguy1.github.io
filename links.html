@@ -620,6 +620,10 @@ body:not(.dark-mode) .sidebar::after {
   <div class="arrow">→</div>
 </a>
 
+<a id="amazonLink" class="link-card" target="_blank">
+  Buy on Amazon
+</a>
+  
 </section>
 
 </main>
@@ -683,6 +687,14 @@ pageLinks.forEach(link => {
     }, 1000);
   });
 });
+
+const link = document.getElementById("amazonLink");
+
+if (navigator.language.includes("GB")) {
+  link.href = "https://amzn.to/41YE7GW";
+} else {
+  link.href = "https://amazon.com";
+}
 </script>
 
 </body>
