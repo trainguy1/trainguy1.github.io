@@ -487,6 +487,50 @@ footer {
   color: white;
 }
 
+/* LIGHT MODE (when NOT dark mode) */
+
+body:not(.dark-mode) {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Header */
+body:not(.dark-mode) header {
+  background: #007bff;
+  color: white;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+body:not(.dark-mode) header h1 {
+  color: white;
+}
+
+/* Sections */
+body:not(.dark-mode) .section {
+  background: #ffffff;
+  color: #000;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Contact form */
+body:not(.dark-mode) .contact-form input,
+body:not(.dark-mode) .contact-form textarea {
+  background: white;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+body:not(.dark-mode) .contact-form button {
+  background: #007bff;
+  color: white;
+}
+
+body:not(.dark-mode) .contact-form button:hover {
+  background: #0056b3;
+}
+  
 /* MOBILE */
 @media (max-width: 700px) {
   .img-container {
