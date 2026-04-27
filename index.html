@@ -46,6 +46,21 @@ body {
   border: 1px solid #555;
 }
 
+/* PAGE TRAIN TRANSITION */
+#pageTrainTransition {
+  position: fixed;
+  top: 45%;
+  left: -200px;
+  font-size: 5rem;
+  z-index: 9999;
+  pointer-events: none;
+  transition: left 0.8s ease-in-out;
+}
+
+#pageTrainTransition.active {
+  left: 110%;
+}
+
 /* OVERLAY */
 #overlay {
   position: fixed;
@@ -286,23 +301,8 @@ h2 {
   gap: 1em;
 }
 
-.gallery img {
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1;
-}
-
-.gallery img:hover {
-  transform: scale(1.5);
-  z-index: 10;
-  outline: 4px solid #007bff;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
 .img-container {
+  width: calc(33.333% - 1em);
   position: relative;
   z-index: 1;
 }
@@ -317,12 +317,14 @@ h2 {
   object-fit: cover;
   border-radius: 8px;
   display: block;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
 .img-container:hover img {
   transform: scale(1.5);
   z-index: 50;
+  outline: 4px solid #007bff;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
@@ -331,6 +333,7 @@ h2 {
   bottom: 0;
   left: 0;
   width: 100%;
+  box-sizing: border-box;
   padding: 10px;
   background: rgba(0,0,0,0.7);
   color: white;
@@ -343,18 +346,6 @@ h2 {
 
 .img-container:hover .caption {
   opacity: 1;
-}
-
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-
-.img-container {
-  width: calc(33.333% - 1em);
-  position: relative;
-  z-index: 1;
 }
 
 /* CONTACT */
@@ -392,7 +383,7 @@ footer {
 
 /* MOBILE */
 @media (max-width: 700px) {
-  .gallery img {
+  .img-container {
     width: 100%;
   }
 
@@ -405,6 +396,7 @@ footer {
 
 <body>
 
+<div id="pageTrainTransition">🚆</div>
 <div id="overlay"></div>
 
 <nav id="sidebar" class="sidebar">
@@ -415,7 +407,7 @@ footer {
 
   <h2>Pages</h2>
   <a href="index.html" class="active">Home</a>
-  <a href="links.html">Links</a>
+  <a href="links.html" class="page-link">Links</a>
 </nav>
 
 <button id="openSidebar" class="menu-btn">
@@ -443,39 +435,39 @@ footer {
 <section class="section">
   <h2>Gallery</h2>
 
-<div class="gallery">
+  <div class="gallery">
 
-  <div class="img-container">
-    <img src="https://images.unsplash.com/photo-1683425806298-178e0fdfc287?q=80&w=1374&auto=format&fit=crop" alt="Modern train">
-    <div class="caption">Elizabeth Line - Class 345</div>
+    <div class="img-container">
+      <img src="https://images.unsplash.com/photo-1683425806298-178e0fdfc287?q=80&w=1374&auto=format&fit=crop" alt="Modern train">
+      <div class="caption">Elizabeth Line - Class 345</div>
+    </div>
+
+    <div class="img-container">
+      <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop" alt="Train station">
+      <div class="caption">GWR - Class 802</div>
+    </div>
+
+    <div class="img-container">
+      <img src="https://images.unsplash.com/photo-1680993136369-84072bb4882e?q=80&w=1740&auto=format&fit=crop" alt="Train view">
+      <div class="caption">South Western Railway - Class 450</div>
+    </div>
+
+    <div class="img-container">
+      <img src="https://images.unsplash.com/photo-1762417421978-d95cc60ad968?q=80&w=687&auto=format&fit=crop" alt="Railway">
+      <div class="caption">London Underground (District line) - S7 Stock</div>
+    </div>
+
+    <div class="img-container">
+      <img src="london-overground.png" alt="London Overground train">
+      <div class="caption">London Overground - Class 710</div>
+    </div>
+
+    <div class="img-container">
+      <img src="class-801.JPG" alt="Class 801">
+      <div class="caption">LNER - Class 801</div>
+    </div>
+
   </div>
-
-  <div class="img-container">
-    <img src="https://images.unsplash.com/photo-1585585819719-fe03f0c77f35?q=80&w=800&auto=format&fit=crop" alt="Train station">
-    <div class="caption">GWR - Class 802</div>
-  </div>
-
-  <div class="img-container">
-    <img src="https://images.unsplash.com/photo-1680993136369-84072bb4882e?q=80&w=1740&auto=format&fit=crop" alt="Train view">
-    <div class="caption">South Western Railway - Class 450</div>
-  </div>
-
-  <div class="img-container">
-    <img src="https://images.unsplash.com/photo-1762417421978-d95cc60ad968?q=80&w=687&auto=format&fit=crop" alt="Railway">
-    <div class="caption">London Underground (District line) - S7 Stock</div>
-  </div>
-
-  <div class="img-container">
-    <img src="london-overground.png" alt="London Overground train">
-    <div class="caption">London Overground - Class 710</div>
-  </div>
-
-  <div class="img-container">
-    <img src="class-801.JPG" alt="Class 801">
-    <div class="caption">LNER - Class 801</div>
-  </div>
-
-</div>
 </section>
 
 <section class="section">
@@ -501,6 +493,8 @@ const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("openSidebar");
 const overlay = document.getElementById("overlay");
 const closeSidebar = document.getElementById("closeSidebar");
+const trainTransition = document.getElementById("pageTrainTransition");
+const pageLinks = document.querySelectorAll(".page-link");
 
 if (localStorage.getItem("darkMode") === "on") {
   document.body.classList.add("dark-mode");
@@ -533,6 +527,20 @@ overlay.onclick = () => {
   menuBtn.classList.remove("open");
   overlay.classList.remove("active");
 };
+
+pageLinks.forEach(link => {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const targetPage = this.href;
+
+    trainTransition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 800);
+  });
+});
 </script>
 
 </body>
