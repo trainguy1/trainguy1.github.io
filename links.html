@@ -444,6 +444,56 @@ footer {
   color: white;
 }
 
+/* LIGHT MODE (when NOT dark mode) */
+
+body:not(.dark-mode) {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Header */
+body:not(.dark-mode) header {
+  background: #007bff;
+  color: white;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+body:not(.dark-mode) header h1 {
+  color: white;
+}
+
+/* Cards */
+body:not(.dark-mode) .card {
+  background: #ffffff;
+  color: #000;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Link cards */
+body:not(.dark-mode) .link-card {
+  background: #007bff;
+  color: white;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+body:not(.dark-mode) .link-title,
+body:not(.dark-mode) .link-subtitle {
+  color: white;
+}
+
+body:not(.dark-mode) .arrow {
+  color: white;
+}
+
+/* Hover stays nice */
+body:not(.dark-mode) .link-card:hover {
+  background: #0056b3;
+  outline: none;
+}
+  
 /* MOBILE */
 @media (max-width: 700px) {
   header {
