@@ -48,6 +48,29 @@ body:not(.dark-mode) .link-card {
   color: #ffcc00;
 }
 
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: "Courier New", monospace;
+  color: #ffcc00;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+}
+  
 /* OVERLAY */
 #overlay {
   position: fixed;
@@ -548,6 +571,12 @@ body:not(.dark-mode) .sidebar::after {
 
 <body>
 
+<div id="loader">
+  <div class="loader-text">
+    LOADING NETWORK<span id="dots">.</span>
+  </div>
+</div>
+  
 <img id="pageTrainTransition" src="train.PNG" alt="Train">
   
 <div id="overlay"></div>
@@ -685,7 +714,23 @@ pageLinks.forEach(link => {
   });
 });
 
+const loader = document.getElementById("loader");
+const dots = document.getElementById("dots");
 
+let dotState = 1;
+
+setInterval(() => {
+  dots.textContent = ".".repeat(dotState);
+
+  dotState++;
+  if (dotState > 3) dotState = 1;
+}, 400);
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 800);
+});
 </script>
 
 </body>
