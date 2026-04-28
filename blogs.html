@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David's Blogs</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #ffffff;
+  color: #000;
+  transition: 0.3s;
+}
+
+.dark-mode {
+  background: #050505;
+  color: #f5f5f5;
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: "Courier New", monospace;
+  color: #007bff;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+}
+
+.dark-mode #loader {
+  background: #050505;
+}
+
+.dark-mode .loader-text {
+  color: #ffcc00;
+}
+
+#pageTrainTransition {
+  position: fixed;
+  top: 50%;
+  left: -210%;
+  transform: translateY(-50%);
+  height: 120px;
+  width: auto;
+  z-index: 9999;
+  pointer-events: none;
+  transition: left 1s linear;
+}
+
+#pageTrainTransition.active {
+  left: 100%;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 20;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -290px;
+  width: 240px;
+  height: 100%;
+  background: #050505;
+  color: #ffcc00;
+  padding: 1.5em;
+  box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+  transition: left 0.3s ease;
+  z-index: 30;
+  border-right: 3px solid #222;
+}
+
+body:not(.dark-mode) .sidebar {
+  background: #007bff;
+  color: white;
+  border-right: 3px solid #0056b3;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar h2 {
+  color: #ffcc00;
+  font-family: "Courier New", monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: #111;
+  padding: 0.6em;
+  border-radius: 6px;
+  border: 1px solid #333;
+  margin-top: 60px;
+}
+
+body:not(.dark-mode) .sidebar h2 {
+  background: #0056b3;
+  color: white;
+  border: 1px solid #004999;
+}
+
+.sidebar a {
+  display: block;
+  font-family: "Courier New", monospace;
+  color: #ffcc00;
+  text-decoration: none;
+  margin: 1em 0;
+  padding: 0.7em;
+  border-radius: 6px;
+  background: #0b0b0b;
+  border: 1px solid #333;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+body:not(.dark-mode) .sidebar a {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.sidebar.open a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar.open a:hover {
+  background: #1a1a00;
+  color: #fff3a0;
+  transform: translateX(5px);
+}
+
+.sidebar.open a.active {
+  background: #ffcc00;
+  color: #111;
+  font-weight: bold;
+  box-shadow: 0 0 18px rgba(255,204,0,0.8);
+  transform: translateX(8px);
+}
+
+body:not(.dark-mode) .sidebar.open a:hover,
+body:not(.dark-mode) .sidebar.open a.active {
+  background: white;
+  color: #007bff;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn span {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: white;
+}
+
+.close-btn span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.close-btn span:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+.menu-btn {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 25;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.bar {
+  width: 22px;
+  height: 2px;
+  background: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+header {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  position: relative;
+}
+
+.dark-mode header {
+  background: #050505;
+  color: #ffcc00;
+  border-bottom: 3px solid #222;
+}
+
+header h1 {
+  font-family: "Courier New", monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.power-switch {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.power-btn {
+  width: 42px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: #222;
+  color: #777;
+  transition: 0.25s;
+}
+
+.power-btn:active {
+  transform: translateY(2px);
+}
+
+.power-btn.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 0 12px rgba(0,123,255,0.8);
+  animation: powerPulse 0.3s ease;
+}
+
+.dark-mode .power-btn.active {
+  background: #ffcc00;
+  color: #111;
+  box-shadow: 0 0 14px rgba(255,204,0,0.8);
+}
+
+@keyframes powerPulse {
+  50% { transform: scale(1.08); }
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 1.5em;
+}
+
+.intro-card,
+.blog-card {
+  background: #007bff;
+  color: white;
+  border-radius: 16px;
+  padding: 1.5em;
+  margin-bottom: 1.2em;
+  text-decoration: none;
+  display: block;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: 0.25s;
+}
+
+.dark-mode .intro-card,
+.dark-mode .blog-card {
+  background: #101010;
+  color: #f5f5f5;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 18px rgba(255,204,0,0.08);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.blog-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 0.4em;
+}
+
+.blog-date {
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-bottom: 0.7em;
+}
+
+.blog-desc {
+  opacity: 0.95;
+}
+
+.arrow {
+  font-size: 1.4em;
+  margin-top: 0.8em;
+}
+
+h2 {
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+footer {
+  text-align: center;
+  padding: 1em;
+  background: #222;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  header {
+    padding-top: 4em;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+  <div class="loader-text">LOADING NETWORK<span id="dots">.</span></div>
+</div>
+
+<img id="pageTrainTransition" src="train.PNG" alt="Train">
+<audio id="switchSound" src="switch.mp3"></audio>
+
+<div id="overlay"></div>
+
+<nav id="sidebar" class="sidebar">
+  <button id="closeSidebar" class="close-btn">
+    <span></span>
+    <span></span>
+  </button>
+
+  <h2>Pages</h2>
+  <a href="index.html" class="page-link">Home</a>
+  <a href="links.html" class="page-link">Links</a>
+  <a href="blogs.html" class="active">Blogs</a>
+</nav>
+
+<button id="openSidebar" class="menu-btn">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<header>
+  <h1>David's Blogs</h1>
+
+  <div class="power-switch">
+    <button id="lightModeBtn" class="power-btn active">I</button>
+    <button id="darkModeBtn" class="power-btn">O</button>
+  </div>
+</header>
+
+<main>
+
+<section class="intro-card">
+  <h2>Blog</h2>
+  <p>Posts about things I’m interested in, things I’m building, and updates to this website.</p>
+</section>
+
+<a class="blog-card page-link" href="why-i-built-this-website.html">
+  <div class="blog-title">Why I Built This Website</div>
+  <div class="blog-date">Coming soon</div>
+  <div class="blog-desc">A short post about why I made this site and what I wanted it to become.</div>
+  <div class="arrow">→</div>
+</a>
+
+<a class="blog-card page-link" href="website-progress.html">
+  <div class="blog-title">My Website Progress</div>
+  <div class="blog-date">Coming soon</div>
+  <div class="blog-desc">Updates about new features, design changes, and things I’ve improved.</div>
+  <div class="arrow">→</div>
+</a>
+
+<a class="blog-card page-link" href="things-im-interested-in.html">
+  <div class="blog-title">Things I’m Interested In</div>
+  <div class="blog-date">Coming soon</div>
+  <div class="blog-desc">A more personal post about hobbies, projects, games, design, and other interests.</div>
+  <div class="arrow">→</div>
+</a>
+
+</main>
+
+<footer>
+  <p>© 2026 David</p>
+</footer>
+
+<script>
+const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("openSidebar");
+const overlay = document.getElementById("overlay");
+const closeSidebar = document.getElementById("closeSidebar");
+const trainTransition = document.getElementById("pageTrainTransition");
+const pageLinks = document.querySelectorAll(".page-link");
+
+const lightModeBtn = document.getElementById("lightModeBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
+const switchSound = document.getElementById("switchSound");
+
+function playClick() {
+  switchSound.currentTime = 0;
+  switchSound.play();
+}
+
+function updateThemeButtons() {
+  if (document.body.classList.contains("dark-mode")) {
+    lightModeBtn.classList.remove("active");
+    darkModeBtn.classList.add("active");
+  } else {
+    darkModeBtn.classList.remove("active");
+    lightModeBtn.classList.add("active");
+  }
+}
+
+if (localStorage.getItem("darkMode") === "on") {
+  document.body.classList.add("dark-mode");
+}
+
+updateThemeButtons();
+
+lightModeBtn.onclick = () => {
+  playClick();
+  document.body.classList.remove("dark-mode");
+  localStorage.setItem("darkMode", "off");
+  updateThemeButtons();
+};
+
+darkModeBtn.onclick = () => {
+  playClick();
+  document.body.classList.add("dark-mode");
+  localStorage.setItem("darkMode", "on");
+  updateThemeButtons();
+};
+
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("open");
+  menuBtn.classList.toggle("open");
+  overlay.classList.toggle("active");
+};
+
+closeSidebar.onclick = () => {
+  sidebar.classList.remove("open");
+  menuBtn.classList.remove("open");
+  overlay.classList.remove("active");
+};
+
+overlay.onclick = () => {
+  sidebar.classList.remove("open");
+  menuBtn.classList.remove("open");
+  overlay.classList.remove("active");
+};
+
+pageLinks.forEach(link => {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const targetPage = this.href;
+    trainTransition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 800);
+  });
+});
+
+const loader = document.getElementById("loader");
+const dots = document.getElementById("dots");
+
+let dotState = 1;
+
+setInterval(() => {
+  dots.textContent = ".".repeat(dotState);
+  dotState++;
+  if (dotState > 3) dotState = 1;
+}, 400);
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 800);
+});
+</script>
+
+</body>
+</html>
