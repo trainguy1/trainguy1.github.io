@@ -721,6 +721,8 @@ body.loaded {
 </div>
 </header>
 
+<audio id="switchSound" src="switch.mp3"></audio>
+  
 <main>
 
 <section class="section">
@@ -793,6 +795,12 @@ const pageLinks = document.querySelectorAll(".page-link");
 
 const lightModeBtn = document.getElementById("lightModeBtn");
 const darkModeBtn = document.getElementById("darkModeBtn");
+const switchSound = document.getElementById("switchSound");
+
+function playClick() {
+  switchSound.currentTime = 0;
+  switchSound.play();
+}
 
 function updateThemeButtons() {
   if (document.body.classList.contains("dark-mode")) {
@@ -811,12 +819,14 @@ if (localStorage.getItem("darkMode") === "on") {
 updateThemeButtons();
 
 lightModeBtn.onclick = () => {
+  playClick();
   document.body.classList.remove("dark-mode");
   localStorage.setItem("darkMode", "off");
   updateThemeButtons();
 };
 
 darkModeBtn.onclick = () => {
+  playClick();
   document.body.classList.add("dark-mode");
   localStorage.setItem("darkMode", "on");
   updateThemeButtons();
