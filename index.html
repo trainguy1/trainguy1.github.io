@@ -387,6 +387,31 @@ header h1 {
   color: #111;
   box-shadow: 0 0 14px rgba(255,204,0,0.8);
 }
+
+.power-btn {
+  position: relative;
+  transform: translateY(0);
+}
+
+.power-btn:active {
+  transform: translateY(2px);
+}
+
+.power-btn.active {
+  animation: powerPulse 0.3s ease;
+}
+
+@keyframes powerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
   
 /* MAIN */
 main {
