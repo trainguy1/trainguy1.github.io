@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOG TITLE HERE - David's Modern Trains</title>
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico?v=11">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=11">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #ffffff;
+  color: #000;
+  opacity: 0;
+  transition: opacity 0.4s ease, background 0.3s, color 0.3s;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+.dark-mode {
+  background: #050505;
+  color: #f5f5f5;
+}
+
+/* LOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: "Courier New", monospace;
+  color: #007bff;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+}
+
+.dark-mode #loader {
+  background: #050505;
+}
+
+.dark-mode .loader-text {
+  color: #ffcc00;
+}
+
+/* TRAIN TRANSITION */
+#pageTrainTransition {
+  position: fixed;
+  top: 50%;
+  left: -210%;
+  transform: translateY(-50%);
+  height: 120px;
+  width: auto;
+  z-index: 9999;
+  pointer-events: none;
+  transition: left 1s linear;
+}
+
+#pageTrainTransition.active {
+  left: 100%;
+  filter: blur(1.5px);
+}
+
+/* HEADER */
+header {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  position: relative;
+}
+
+.dark-mode header {
+  background: #050505;
+  color: #ffcc00;
+  border-bottom: 3px solid #222;
+  box-shadow: 0 0 25px rgba(255,204,0,0.15);
+}
+
+header h1 {
+  font-family: "Courier New", monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* POWER SWITCH */
+.power-switch {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.power-btn {
+  width: 42px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: #222;
+  color: #777;
+  transition: 0.25s;
+}
+
+.power-btn.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 0 12px rgba(0,123,255,0.8);
+  animation: powerPulse 0.3s ease;
+}
+
+.dark-mode .power-btn.active {
+  background: #ffcc00;
+  color: #111;
+  box-shadow: 0 0 14px rgba(255,204,0,0.8);
+}
+
+.power-btn:active {
+  transform: translateY(2px);
+}
+
+@keyframes powerPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* MAIN ARTICLE */
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 1.5em;
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 1em 0 1.5em;
+  padding: 0.8em 1.1em;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.25s;
+  box-shadow: 0 0 12px rgba(0,123,255,0.35);
+}
+
+.back-btn:hover {
+  background: #0056b3;
+  transform: translateX(-4px) scale(1.03);
+}
+
+.dark-mode .back-btn {
+  background: #ffcc00;
+  color: #111;
+  box-shadow: 0 0 14px rgba(255,204,0,0.6);
+}
+
+.dark-mode .back-btn:hover {
+  background: #e6b800;
+}
+
+.blog-post {
+  background: #0056b3;
+  color: white;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.dark-mode .blog-post {
+  background: #101010;
+  color: #f5f5f5;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 20px rgba(255,204,0,0.08);
+}
+
+.blog-post h2,
+.blog-post h3 {
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.blog-post h2 {
+  font-size: 2em;
+  margin-top: 0;
+}
+
+.blog-date {
+  font-family: "Courier New", monospace;
+  opacity: 0.85;
+  margin-bottom: 2em;
+}
+
+.blog-post p {
+  line-height: 1.7;
+  font-size: 1.05em;
+}
+
+.dark-mode .blog-post h2,
+.dark-mode .blog-post h3 {
+  color: #ffcc00;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 1em;
+  background: #222;
+  color: white;
+}
+
+.dark-mode footer {
+  background: #000;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  header {
+    padding-top: 4.5em;
+  }
+
+  .power-switch {
+    top: 15px;
+    right: 15px;
+  }
+
+  .blog-post {
+    padding: 1.3em;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+  <div class="loader-text">
+    LOADING NETWORK<span id="dots">.</span>
+  </div>
+</div>
+
+<img id="pageTrainTransition" src="train.PNG" alt="Train">
+
+<header>
+  <h1>David's Modern Trains</h1>
+
+  <div class="power-switch">
+    <button id="lightModeBtn" class="power-btn active">I</button>
+    <button id="darkModeBtn" class="power-btn">O</button>
+  </div>
+</header>
+
+<audio id="switchSound" src="switch.mp3"></audio>
+
+<main>
+
+<a href="blogs.html" class="back-btn page-link">← Back to Blogs</a>
+
+<article class="blog-post">
+  <h2>BLOG TITLE HERE</h2>
+  <p class="blog-date">DATE TBD</p>
+
+  <p>
+    COMING SOON.
+  </p>
+
+  <h3>COMING SOON.</h3>
+  <p>
+    COMING SOON.
+  </p>
+
+  <h3>COMING SOON.</h3>
+  <p>
+    COMING SOON.
+  </p>
+
+  <h3>Final Thoughts</h3>
+  <p>
+    COMING SOON.
+  </p>
+</article>
+
+<a href="blogs.html" class="back-btn page-link">← Back to Blogs</a>
+
+</main>
+
+<footer>
+  <p>© 2026 David</p>
+</footer>
+
+<script>
+const trainTransition = document.getElementById("pageTrainTransition");
+const pageLinks = document.querySelectorAll(".page-link");
+
+const lightModeBtn = document.getElementById("lightModeBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
+const switchSound = document.getElementById("switchSound");
+
+function playClick() {
+  switchSound.currentTime = 0;
+  switchSound.play();
+}
+
+function updateThemeButtons() {
+  if (document.body.classList.contains("dark-mode")) {
+    lightModeBtn.classList.remove("active");
+    darkModeBtn.classList.add("active");
+  } else {
+    darkModeBtn.classList.remove("active");
+    lightModeBtn.classList.add("active");
+  }
+}
+
+if (localStorage.getItem("darkMode") === "on") {
+  document.body.classList.add("dark-mode");
+}
+
+updateThemeButtons();
+
+lightModeBtn.onclick = () => {
+  playClick();
+  document.body.classList.remove("dark-mode");
+  localStorage.setItem("darkMode", "off");
+  updateThemeButtons();
+};
+
+darkModeBtn.onclick = () => {
+  playClick();
+  document.body.classList.add("dark-mode");
+  localStorage.setItem("darkMode", "on");
+  updateThemeButtons();
+};
+
+pageLinks.forEach(link => {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const targetPage = this.href;
+
+    trainTransition.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 800);
+  });
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
+const loader = document.getElementById("loader");
+const dots = document.getElementById("dots");
+
+let dotState = 1;
+
+setInterval(() => {
+  dots.textContent = ".".repeat(dotState);
+
+  dotState++;
+  if (dotState > 3) dotState = 1;
+}, 400);
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 800);
+});
+</script>
+
+</body>
+</html>
